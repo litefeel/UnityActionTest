@@ -26,9 +26,10 @@ jobs:
           my_var=$(cat UnityLicense/2019.2.11f1.ulf)
           # echo "$my_var"
           # echo $my_var
-          my_var=aaaa
+          # my_var=aaaa
           echo $my_var
-          echo ::set-env name=UNITY_LICENSE::$my_var
+          # echo ::set-env name=UNITY_LICENSE::$my_var
+          export UNITY_LICENSE=$my_var
           echo ::set-env name=action_state::yellow
 
       - name: show env
