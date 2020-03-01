@@ -27,7 +27,13 @@ jobs:
           # echo "$my_var"
           # echo $my_var
           echo "::set-env name=UNITY_LICENSE::$my_var"
-          echo ${{ env.UNITY_LICENSE }}
+          echo ::set-env name=action_state::yellow
+
+      - name: show env
+        run: |
+        echo ${{ env.action_state }}
+        echo "\n"
+        echo ${{ env.UNITY_LICENSE }}
 
       # Checkout This project
       - name: Checkout repository
@@ -56,8 +62,6 @@ jobs:
         with:
           unityVersion: 2019.2.11f1
           targetPlatform: WebGL 
-        env:
-          UNITY_LICENSE: ${{ $(cat UnityLicense/2019.2.11f1.ulf) }}
 
       # Output 
       - uses: actions/upload-artifact@v1
