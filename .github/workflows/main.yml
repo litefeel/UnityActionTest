@@ -61,7 +61,7 @@ jobs:
 
       # Build
       - name: Build project
-        uses: litefeel/unity-builder@v0.10
+        uses: litefeel/unity-builder@v0.11
         with:
           unityVersion: 2019.2.11f1
           targetPlatform: WebGL 
