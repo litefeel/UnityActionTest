@@ -22,8 +22,11 @@ jobs:
       # Set env
       - name: Set env UNITY_LICENSE
         run: |
+          cat UnityLicense/2019.2.11f1.ulf
           my_var=$(cat UnityLicense/2019.2.11f1.ulf)
-          echo "::set-env name=UNITY_LICENSE::{my_var}"
+          echo "$my_var"
+          echo $my_var
+          echo "::set-env name=UNITY_LICENSE::${my_var}"
           echo "${{ env.UNITY_LICENSE }}"
 
       # Checkout This project
