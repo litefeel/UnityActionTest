@@ -57,7 +57,7 @@ jobs:
           unityVersion: 2019.2.11f1
           targetPlatform: WebGL 
         env:
-          UNITY_LICENSE: $(cat UnityLicense/2019.2.11f1.ulf)
+          UNITY_LICENSE: ${{ $(cat UnityLicense/2019.2.11f1.ulf) }}
 
       # Output 
       - uses: actions/upload-artifact@v1
