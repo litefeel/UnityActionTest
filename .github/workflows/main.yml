@@ -24,7 +24,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           lfs: true
+          repository: https://github.com/litefeel/Unity-AlignTools.git
           path: Packages/MyPlugin
+          ref: upm
     
       # Cache
       - uses: actions/cache@v1.1.0
