@@ -19,6 +19,12 @@ jobs:
         with:
           repository: litefeel/UnityEmptyProject
 
+      # Set env
+      - name: Set env UNITY_LICENSE
+        run: my_var=$(cat UnityLicense/2019.2.11f1.ulf)
+        run: echo "::set-env name=UNITY_LICENSE::{my_var}"
+        run: echo "${{ env.UNITY_LICENSE }}"
+
       # Checkout This project
       - name: Checkout repository
         uses: actions/checkout@v2
