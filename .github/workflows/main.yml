@@ -4,8 +4,8 @@ on:
   pull_request: {}
   push: { branches: [master] }
 
-# env:
-#   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+env:
+  UNITY_LICENSE_PATH: UnityLicense/2019.2.11f1.ulf
 
 jobs:
   build:
@@ -19,24 +19,24 @@ jobs:
         with:
           repository: litefeel/UnityEmptyProject
 
-      # Set env
-      - name: Set env UNITY_LICENSE
-        run: |
-          # cat UnityLicense/2019.2.11f1.ulf
-          my_var=$(cat UnityLicense/2019.2.11f1.ulf)
-          # echo "$my_var"
-          # echo $my_var
-          # my_var=aaaa
-          echo $my_var
-          # echo ::set-env name=UNITY_LICENSE::$my_var
-          export UNITY_LICENSE=$my_var
-          echo ::set-env name=action_state::yellow
+      # # Set env
+      # - name: Set env UNITY_LICENSE
+      #   run: |
+      #     # cat UnityLicense/2019.2.11f1.ulf
+      #     my_var=$(cat UnityLicense/2019.2.11f1.ulf)
+      #     # echo "$my_var"
+      #     # echo $my_var
+      #     # my_var=aaaa
+      #     echo $my_var
+      #     # echo ::set-env name=UNITY_LICENSE::$my_var
+      #     export UNITY_LICENSE=$my_var
+      #     echo ::set-env name=action_state::yellow
 
-      - name: show env
-        run: |
-          echo ${{ env.action_state }}
-          echo "\n"
-          echo ${{ env.UNITY_LICENSE }}
+      # - name: show env
+      #   run: |
+      #     echo ${{ env.action_state }}
+      #     echo "\n"
+      #     echo ${{ env.UNITY_LICENSE }}
 
       # Checkout This project
       - name: Checkout repository
@@ -61,7 +61,7 @@ jobs:
 
       # Build
       - name: Build project
-        uses: webbertakken/unity-builder@v0.10
+        uses: litefeel/unity-builder@v0.10
         with:
           unityVersion: 2019.2.11f1
           targetPlatform: WebGL 
