@@ -31,9 +31,9 @@ jobs:
 
       - name: show env
         run: |
-        echo ${{ env.action_state }}
-        echo "\n"
-        echo ${{ env.UNITY_LICENSE }}
+          echo ${{ env.action_state }}
+          echo "\n"
+          echo ${{ env.UNITY_LICENSE }}
 
       # Checkout This project
       - name: Checkout repository
