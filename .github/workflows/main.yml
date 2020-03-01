@@ -13,11 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      # Checkout
+      # Checkout Empty Project
+      - name: Checkout Empty Project
+        uses: actions/checkout@v2
+        with:
+          repository: https://github.com/litefeel/UnityEmptyProject.git
+
+      # Checkout This project
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           lfs: true
+          path: Packages/MyPlugin
     
       # Cache
       - uses: actions/cache@v1.1.0
