@@ -17,14 +17,14 @@ jobs:
       - name: Checkout Empty Project
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/litefeel/UnityEmptyProject.git
+          repository: litefeel/UnityEmptyProject
 
       # Checkout This project
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           lfs: true
-          repository: https://github.com/litefeel/Unity-AlignTools.git
+          repository: litefeel/Unity-AlignTools
           path: Packages/MyPlugin
           ref: upm
     
