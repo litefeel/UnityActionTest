@@ -1,8 +1,8 @@
-name: Actions 😎
+name: Test 😎
 
 on:
   pull_request: {}
-  push: { branches: [master] }
+  push: {}
 
 # env:
 #   UNITY_LICENSE_PATH: UnityLicense/2019.2.11f1.ulf
