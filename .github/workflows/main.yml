@@ -8,37 +8,31 @@ env:
   UNITY_LICENSE_PATH: UnityLicense/2019.2.11f1.ulf
 
 jobs:
-  build:
-    name: Build my project ✨
+  Test:
+    name: Test on version ${{ matrix.unityVersion }} 🔑
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        unityVersion:
+          - 2019.3.3f1
+          - 2019.2.11f1
+          - 2018.4.17f1
+        testMode:
+          - playmode
+          - editmode
     steps:
-    
+      # Set env
+      - name: Set env UNITY_LICENSE_PATH
+        run: echo ::set-env name=UNITY_LICENSE_PATH::${{ matrix.unityVersion }}.ulf
+
       # Checkout Empty Project
       - name: Checkout Empty Project
         uses: actions/checkout@v2
         with:
           repository: litefeel/UnityEmptyProject
 
-      # # Set env
-      # - name: Set env UNITY_LICENSE
-      #   run: |
-      #     # cat UnityLicense/2019.2.11f1.ulf
-      #     my_var=$(cat UnityLicense/2019.2.11f1.ulf)
-      #     # echo "$my_var"
-      #     # echo $my_var
-      #     # my_var=aaaa
-      #     echo $my_var
-      #     # echo ::set-env name=UNITY_LICENSE::$my_var
-      #     export UNITY_LICENSE=$my_var
-      #     echo ::set-env name=action_state::yellow
-
-      # - name: show env
-      #   run: |
-      #     echo ${{ env.action_state }}
-      #     echo "\n"
-      #     echo ${{ env.UNITY_LICENSE }}
-
-      # Checkout This project
+      # Checkout this project
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -46,28 +40,38 @@ jobs:
           repository: litefeel/Unity-AlignTools
           path: Packages/MyPlugin
           ref: upm
-    
+
       # Cache
       - uses: actions/cache@v1.1.0
         with:
           path: Library
           key: Library
 
-      # # Test
-      # - name: Run tests
-      #   uses: webbertakken/unity-test-runner@v1.3
+      # Test
+      - name: Run tests
+        uses: litefeel/unity-test-runner@v1.6
+        id: tests
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+
+      # # Build
+      # - name: Build project
+      #   uses: litefeel/unity-builder@v0.13
       #   with:
-      #     unityVersion: 2019.2.11f1
+      #     unityVersion: ${{ matrix.unityVersion }}
+      #     targetPlatform: WebGL
 
-      # Build
-      - name: Build project
-        uses: litefeel/unity-builder@v0.14
-        with:
-          unityVersion: 2019.2.11f1
-          targetPlatform: WebGL 
-
-      # Output 
+      # Output
       - uses: actions/upload-artifact@v1
+        name: Upload tests
         with:
-          name: Build
-          path: build
+          name: Test results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
+
+      # - uses: actions/upload-artifact@v1
+      #   name: Upload build
+      #   with:
+      #     name: Build
+      #     path: build
