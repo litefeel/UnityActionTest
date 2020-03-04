@@ -4,12 +4,12 @@ on:
   pull_request: {}
   push: { branches: [master] }
 
-env:
-  UNITY_LICENSE_PATH: UnityLicense/2019.2.11f1.ulf
+# env:
+#   UNITY_LICENSE_PATH: UnityLicense/2019.2.11f1.ulf
 
 jobs:
   Test:
-    name: Test on version ${{ matrix.unityVersion }} 🔑
+    name: Test ${{ matrix.unityVersion }} ${{ matrix.testMode }} 🔑
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -24,7 +24,7 @@ jobs:
     steps:
       # Set env
       - name: Set env UNITY_LICENSE_PATH
-        run: echo ::set-env name=UNITY_LICENSE_PATH::${{ matrix.unityVersion }}.ulf
+        run: echo ::set-env name=UNITY_LICENSE_PATH::UnityLicense/${{ matrix.unityVersion }}.ulf
 
       # Checkout Empty Project
       - name: Checkout Empty Project
