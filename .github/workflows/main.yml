@@ -67,7 +67,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         name: Upload tests
         with:
-          name: Test results for ${{ matrix.testMode }}
+          name: Test results for ${{ matrix.testMode }} on unity ${{ matrix.unityVersion }}
           path: ${{ steps.tests.outputs.artifactsPath }}
 
       # - uses: actions/upload-artifact@v1
